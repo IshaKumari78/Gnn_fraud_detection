@@ -1,2 +1,13 @@
 # Gnn_fraud_detection
 Fraud Detection using Graph Neural Networks 
+This project focuses on detecting fraudulent financial transactions by leveraging Graph Neural Networks (GNNs) to model complex relationships between users and transactions. Traditional machine learning approaches often treat transactions as independent records, which limits their ability to capture relational fraud patterns such as money laundering, collusion, or repeated suspicious transfers. To address this limitation, the project represents transaction data as a graph structure, enabling the model to learn from both transaction attributes and network connectivity.
+
+The PaySim dataset, a simulated mobile money transaction dataset with labelled fraud cases, is used for experimentation. Each transaction is transformed into a node in the graph, while users involved in sending and receiving money are also represented as nodes. Edges connect users to the transactions they participate in, forming a heterogeneous transaction graph. This representation allows the model to exploit relational dependencies between users and transactions.
+
+Graph construction is performed using NetworkX, where transaction nodes store attributes such as transaction amount and time step, along with fraud labels. The constructed graph is then converted into a PyTorch Geometric data format for efficient graph-based learning. Only transaction nodes are labelled for classification, while user nodes act as contextual nodes that help propagate information through the network.
+
+A Graph Convolutional Network (GCN) is implemented using PyTorch Geometric to learn node embeddings and perform binary classification of fraudulent and legitimate transactions. The model consists of multiple graph convolution layers followed by a softmax classifier. To address the inherent class imbalance in fraud detection, a weighted cross-entropy loss function is used during training.
+
+The model is trained using an Adam optimizer and evaluated using industry-standard metrics including Precision, Recall, and ROC-AUC. These metrics are chosen to reflect real-world fraud detection requirements, where minimizing false positives while accurately identifying fraudulent activity is critical. The project demonstrates that graph-based learning provides an effective framework for fraud detection by capturing relational patterns that are not accessible to traditional tabular models.
+
+The entire workflow including data ingestion, graph construction, model training, and evaluation is implemented in a reproducible Jupyter notebook with detailed markdown walkthroughs and execution instructions, making the project easy to understand and extend.
